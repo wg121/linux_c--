@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+int main(){
+    pid_t pid = -1;
+    int a = 10;
+
+    pid = fork();
+    if(-1 == pid){
+    	perror("fork");
+	return 1;
+    }
+    
+    if(0 == pid){
+	    printf("this is child process a = %d\n",++a);
+    	exit(0);
+    }
+    else{
+   	    wait(NULL); 
+	    printf("this is father process a = %d\n",++a);
+    }
+
+
+    return 0;
+}
